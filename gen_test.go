@@ -1,9 +1,8 @@
-package test
+package gen
 
 import (
 	"testing"
 
-	"github.com/inkochetkov/gen-str/pkg/gen"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -11,7 +10,7 @@ import (
 func TestBcrypt(t *testing.T) {
 	want := "test"
 
-	have, err := gen.GenPassword(want)
+	have, err := GenPassword(want)
 	assert.NoError(t, err)
 
 	err = bcrypt.CompareHashAndPassword([]byte(have), []byte(want))
@@ -19,26 +18,26 @@ func TestBcrypt(t *testing.T) {
 }
 
 func TestNumber(t *testing.T) {
-	i := gen.GenNamber()
+	i := GenNamber()
 	t.Log(i)
 
-	j := gen.GenFloat()
+	j := GenFloat()
 	t.Log(j)
 
-	n := gen.GenIntDiapason(1, 2)
+	n := GenIntDiapason(1, 2)
 	t.Log(n)
 }
 
 func TestString(t *testing.T) {
-	str := gen.GenRandomStrRune(1)
+	str := GenRandomStrRune(1)
 	t.Log(str)
 
-	str = gen.GenRandomStrSpec(2)
+	str = GenRandomStrSpec(2)
 	t.Log(str)
 }
 
 func TestUUID(t *testing.T) {
-	str, err := gen.GenUUID()
+	str, err := GenUUID()
 	assert.NoError(t, err)
 
 	assert.Equal(t, len(str), 36)
